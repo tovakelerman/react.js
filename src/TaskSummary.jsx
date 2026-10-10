@@ -1,6 +1,7 @@
 import React from 'react';
 
 function TaskSummary(props) {
+  // סיכום: סופרים את סך המשימות ואת אלו שהושלמו מתוך המערך שמגיע ב-props
   const totalTasks = props.tasks.length;
   const completedTasks = props.tasks.filter(task => task.completed).length;
 

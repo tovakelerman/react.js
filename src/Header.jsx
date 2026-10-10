@@ -1,6 +1,5 @@
-import React from 'react';
-
 function Header(props) {
+  // מקבל את שם המשתמש דרך props ומציג אותו בכותרת המשנה
   return (
     <header className="header-container">
       <h1 className="header-title">Task Management System</h1>
