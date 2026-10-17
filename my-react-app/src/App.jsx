@@ -1,122 +1,76 @@
-import { useState } from 'react'
-import heroImg from './assets/hero.png'
-import reactLogo from './assets/react.svg'
-import viteLogo from './assets/vite.svg'
+import { useState } from 'react';
+import Header from './Header';
+import NameInput from './NameInput';
+import TaskForm from './TaskForm';
+import TaskList from './TaskList';
+import TaskSummary from './TaskSummary';
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+  // שם המשתמש מוחזק כאן (Lifting State Up) כך ש-Header וגם
+  // השדה מציגים ומעדכנים אותו מאותו מקור אמת אחד.
+  const [userName, setUserName] = useState('');
+
+  // הסטייט מחזיק את מערך המשימות — כך שינוי במצב משימה
+  // יפעיל רינדור מחדש גם של הרשימה וגם של הסיכום.
+  const [tasks, setTasks] = useState([
+    { id: 1, title: "Buy groceries", completed: true },
+    { id: 2, title: "Learn React", completed: false },
+    { id: 3, title: "Clean the room", completed: true },
+    { id: 4, title: "Submit homework", completed: false },
+    { id: 5, title: "Review React documentation", completed: false },
+    { id: 6, title: "Practice array methods", completed: true },
+    { id: 7, title: "Design application layout", completed: true },
+    { id: 8, title: "Fix component styling", completed: false }
+  ]);
+
+  // פונקציית ה-toggle: מקבלת מזהה משימה, וכל לחיצה הופכת את המצב
+  // (finished <-> unfinished). משתמשים ב-map כדי להחזיר מערך חדש
+  // בלי לשנות (to mutate) את המערך הקיים — עקרון האימוטאביליות.
+  const toggleTask = (taskId) => {
+    setTasks(prevTasks =>
+      prevTasks.map(task =>
+        task.id === taskId
+          ? { ...task, completed: !task.completed }
+          : task
+      )
+    );
+  };
+
+  // פונקציית הוספת משימה: מקבלת תיאור, יוצרת אובייקט משימה חדש
+  // עם מזהה ייחודי, ומעדכנת את המערך. משתמשים ב-spread operator (...)
+  // כדי לבנות מערך חדש (ישן + חדש) בלי לשנות את המערך הקיים.
+  const addTask = (description) => {
+    const newTask = {
+      id: Date.now(),           // מזהה ייחודי לפי חותמת זמן
+      title: description,       // התיאור שהמשתמש הקליד
+      completed: false          // משימה חדשה מתחילה כלא-הושלמה
+    };
+
+    setTasks(prevTasks => [
+      ...prevTasks,             // שומרים את כל המשימות הקיימות
+      newTask                   // ומוסיפים את החדשה בסוף
+    ]);
+  };
 
   return (
-    <>
-      <section id="center">
-        <div className="hero">
-          <img src={heroImg} className="base" width="170" height="179" alt="" />
-          <img src={reactLogo} className="framework" alt="React logo" />
-          <img src={viteLogo} className="vite" alt="Vite logo" />
-        </div>
-        <div>
-          <h1>Get started</h1>
-          <p>
-            Edit <code>src/App.jsx</code> and save to test <code>HMR</code>
-          </p>
-        </div>
-        <button
-          type="button"
-          className="counter"
-          onClick={() => setCount((count) => count + 1)}
-        >
-          Count is {count}
-        </button>
-      </section>
+    <div className="app-container">
+      {/* כותרת עליונה עם שם המשתמש */}
+      <Header userName={userName} />
 
-      <div className="ticks"></div>
+      {/* קומפוננטה עם קלט שם המשתמש — סטייט מבוקר מההורה */}
+      <NameInput userName={userName} onUserNameChange={setUserName} />
 
-      <section id="next-steps">
-        <div id="docs">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#documentation-icon"></use>
-          </svg>
-          <h2>Documentation</h2>
-          <p>Your questions, answered</p>
-          <ul>
-            <li>
-              <a href="https://vite.dev/" target="_blank">
-                <img className="logo" src={viteLogo} alt="" />
-                Explore Vite
-              </a>
-            </li>
-            <li>
-              <a href="https://react.dev/" target="_blank">
-                <img className="button-icon" src={reactLogo} alt="" />
-                Learn more
-              </a>
-            </li>
-          </ul>
-        </div>
-        <div id="social">
-          <svg className="icon" role="presentation" aria-hidden="true">
-            <use href="/icons.svg#social-icon"></use>
-          </svg>
-          <h2>Connect with us</h2>
-          <p>Join the Vite community</p>
-          <ul>
-            <li>
-              <a href="https://github.com/vitejs/vite" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#github-icon"></use>
-                </svg>
-                GitHub
-              </a>
-            </li>
-            <li>
-              <a href="https://chat.vite.dev/" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#discord-icon"></use>
-                </svg>
-                Discord
-              </a>
-            </li>
-            <li>
-              <a href="https://x.com/vite_js" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#x-icon"></use>
-                </svg>
-                X.com
-              </a>
-            </li>
-            <li>
-              <a href="https://bsky.app/profile/vite.dev" target="_blank">
-                <svg
-                  className="button-icon"
-                  role="presentation"
-                  aria-hidden="true"
-                >
-                  <use href="/icons.svg#bluesky-icon"></use>
-                </svg>
-                Bluesky
-              </a>
-            </li>
-          </ul>
-        </div>
-      </section>
+      {/* טופס הוספת משימה חדשה */}
+      <TaskForm onAddTask={addTask} />
 
-      <div className="ticks"></div>
-      <section id="spacer"></section>
-    </>
-  )
+      {/* העברת מערך המשימות ופונקציית השינוי לקומפוננטת הסיכום */}
+      <TaskSummary tasks={tasks} />
+
+      {/* העברת מערך המשימות ופונקציית ה-toggle לרשימה */}
+      <TaskList tasks={tasks} onToggleTask={toggleTask} />
+    </div>
+  );
 }
 
 export default App
