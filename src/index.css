@@ -1,0 +1,39 @@
+/* סטייל גלובלי בסיסי - נקי משאריות תבנית ה-Vite */
+:root {
+  /* ערכת צבעים ראשית */
+  --bg: #f0f4f8;
+  --surface: #ffffff;
+  --text: #1d2733;
+  --text-muted: #6b7280;
+  --border: #e2e8f0;
+  --primary: #0d6efd;
+  --primary-dark: #0b5ed7;
+  --success-bg: #d1e7dd;
+  --success: #0f5132;
+  --warn-bg: #fff3cd;
+  --warn: #664d03;
+
+  --sans: 'Segoe UI', system-ui, Tahoma, Verdana, sans-serif;
+
+  font: 16px/1.5 var(--sans);
+  color: var(--text);
+  background: var(--bg);
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--bg);
+  color: var(--text);
+  font-family: var(--sans);
+}
+
+#root {
+  min-height: 100vh;
+}

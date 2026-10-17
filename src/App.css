@@ -1,0 +1,272 @@
+/* עיצוב כללי לדף */
+body {
+  margin: 0;
+  padding: 0;
+  background: linear-gradient(180deg, #eef2f7 0%, #f7f9fc 100%);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+}
+
+/* מיכל ראשי של האפליקציה */
+.app-container {
+  max-width: 720px;
+  margin: 0 auto;
+  padding: 40px 32px;
+  direction: rtl;
+  text-align: right;
+}
+
+/* עיצוב הכותרת */
+.header-container {
+  border-bottom: 2px solid #eef2f5;
+  padding-bottom: 15px;
+  margin-bottom: 24px;
+}
+
+.header-title {
+  margin: 0 0 8px 0;
+  color: #1a252c;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.header-subtitle {
+  margin: 0;
+  color: #6c757d;
+  font-size: 16px;
+  font-weight: 500;
+}
+
+/* עיצוב תיבת הסיכום */
+.summary-container {
+  background-color: #eef6ff;
+  border-right: 4px solid #0d6efd;
+  padding: 16px 20px;
+  border-radius: 10px;
+  margin-bottom: 28px;
+}
+
+.summary-title {
+  margin: 0 0 5px 0;
+  color: #0b5ed7;
+  font-size: 18px;
+}
+
+.summary-text {
+  margin: 0;
+  font-size: 15px;
+  color: #333;
+}
+
+/* עיצוב רשימת המשימות */
+.task-list-container {
+  margin-top: 10px;
+}
+
+.task-list-title {
+  font-size: 20px;
+  color: #2c3e50;
+  margin-bottom: 14px;
+  font-weight: 700;
+}
+
+.task-list {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+/* פריט משימה — קארד עם השפעת ריחוף עדינה */
+.task-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding: 14px 16px;
+  margin-bottom: 10px;
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 10px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease, transform 0.1s ease;
+}
+
+.task-item:hover {
+  border-color: #d0d7de;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+.task-item:has(.task-checkbox:checked) {
+  background-color: #f8fbf8;
+}
+
+/* השורה השמאלית של הפריט: סימון + כותרת */
+.task-check {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex: 1;
+  min-width: 0;
+}
+
+/* כותרת המשימה */
+.task-title {
+  font-weight: 600;
+  color: #212529;
+  transition: color 0.2s ease, text-decoration-color 0.2s ease;
+}
+
+/* משימה שהושלמה — קו חוצה ומעט דהויה */
+.task-item:has(.task-checkbox:checked) .task-title {
+  color: #9aa5b1;
+  text-decoration: line-through;
+  text-decoration-color: #9aa5b1;
+}
+
+/* עיצוב תגיות הסטטוס */
+.status-badge {
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.status-badge.completed {
+  background-color: #d1e7dd;
+  color: #0f5132;
+}
+
+.status-badge.in-progress {
+  background-color: #fff3cd;
+  color: #664d03;
+}
+
+/* עיצוב קומפוננטת הזנת השם */
+.name-input {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-bottom: 30px;
+  padding: 18px;
+  background-color: #ffffff;
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.name-input label {
+  font-weight: 600;
+  color: #212529;
+}
+
+.name-input input {
+  padding: 10px 12px;
+  font-size: 16px;
+  border: 1.5px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+.name-input input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+.name-input h2 {
+  margin: 0;
+  color: #0d6efd;
+  font-size: 20px;
+}
+
+/* עיצוב טופס הוספת משימה */
+.task-form {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin: 0 0 28px 0;
+  padding: 20px;
+  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+  border: 1px solid #e9ecef;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
+}
+
+/* תווית "New Task" */
+.task-form label {
+  font-weight: 600;
+  font-size: 15px;
+  color: #212529;
+  letter-spacing: 0.3px;
+}
+
+/* שדה הקלט */
+.task-form input {
+  padding: 12px 14px;
+  font-size: 16px;
+  color: #212529;
+  background-color: #ffffff;
+  border: 1.5px solid #ced4da;
+  border-radius: 8px;
+  outline: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+/* מצב ריחוף על השדה */
+.task-form input:hover {
+  border-color: #adb5bd;
+}
+
+/* מצב מיקוד על השדה */
+.task-form input:focus {
+  border-color: #0d6efd;
+  box-shadow: 0 0 0 3px rgba(13, 110, 253, 0.15);
+}
+
+/* placeholder מעומעם ונעים */
+.task-form input::placeholder {
+  color: #adb5bd;
+  opacity: 1;
+}
+
+/* הכפתור "Add Task" */
+.task-form button {
+  align-self: flex-start;
+  padding: 12px 22px;
+  font-size: 15px;
+  font-weight: 600;
+  color: #ffffff;
+  background-color: #0d6efd;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  box-shadow: 0 2px 6px rgba(13, 110, 253, 0.25);
+  transition: background-color 0.2s ease, transform 0.1s ease, box-shadow 0.2s ease;
+}
+
+/* ריחוף על הכפתור */
+.task-form button:hover {
+  background-color: #0b5ed7;
+  box-shadow: 0 4px 10px rgba(13, 110, 253, 0.35);
+}
+
+/* לחיצה על הכפתור — אפקט "נשיכה" קל */
+.task-form button:active {
+  transform: scale(0.97);
+  box-shadow: 0 1px 3px rgba(13, 110, 253, 0.25);
+}
+
+/* מיקוד מקלדת לנגישות */
+.task-form button:focus-visible {
+  outline: 3px solid rgba(13, 110, 253, 0.4);
+  outline-offset: 2px;
+}
+
+/* עיצוב checkbox של משימה - שדרוג מעבר לסמן ברירת המחדל */
+.task-checkbox {
+  width: 20px;
+  height: 20px;
+  margin: 0;
+  accent-color: #0d6efd;
+  cursor: pointer;
+}
