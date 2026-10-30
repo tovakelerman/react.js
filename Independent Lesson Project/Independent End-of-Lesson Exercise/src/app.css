@@ -1,0 +1,532 @@
+/* ============================================================
+   משתני עיצוב (Design Tokens)
+   כל הצבעים, המרווחים והצללים מוגדרים כאן.
+   מעבר בין מצב בהיר לכהה מתבצע ע"י החלפת הערכים ב-.backgroundAppDark
+   ============================================================ */
+
+:root {
+    /* פלטת צבעים בסיסית */
+    --bg: #f4f6fb;
+    --bg-gradient: radial-gradient(circle at 20% 10%, #e6ecff 0%, #f4f6fb 45%, #f7f5ff 100%);
+    --surface: #ffffff;
+    --surface-alt: #f8fafc;
+    --text: #1e2433;
+    --text-muted: #5d6575;
+    --border: #e2e6ee;
+
+    --brand: #4f46e5;
+    --brand-strong: #4338ca;
+    --brand-soft: #eef0ff;
+    --brand-contrast: #ffffff;
+
+    --accent: #ec4899;
+    --success: #16a34a;
+    --success-soft: #e8f7ee;
+    --danger: #dc2626;
+    --heart: #ec4899;
+
+    /* צללים, רדיוסים ומרווחים */
+    --shadow-sm: 0 1px 2px rgba(16, 24, 40, .06);
+    --shadow-md: 0 8px 24px rgba(16, 24, 40, .08);
+    --shadow-lg: 0 20px 45px rgba(16, 24, 40, .14);
+    --radius-sm: 8px;
+    --radius: 14px;
+    --radius-lg: 22px;
+    --transition: .2s ease;
+
+    --font: 'Segoe UI', 'Arial Hebrew', Arial, system-ui, sans-serif;
+}
+
+/* ---------- מצב כהה ---------- */
+.backgroundAppDark {
+    --bg: #0f1220;
+    --bg-gradient: radial-gradient(circle at 20% 10%, #1c2242 0%, #0f1220 50%, #151026 100%);
+    --surface: #1a1f33;
+    --surface-alt: #212842;
+    --text: #eef1f8;
+    --text-muted: #a4adc6;
+    --border: #2d3553;
+
+    --brand: #818cf8;
+    --brand-strong: #a5b4fc;
+    --brand-soft: #262d55;
+    --brand-contrast: #0f1220;
+
+    --accent: #f472b6;
+    --success: #4ade80;
+    --success-soft: #16341f;
+    --danger: #f87171;
+
+    --shadow-sm: 0 1px 2px rgba(0, 0, 0, .4);
+    --shadow-md: 0 8px 24px rgba(0, 0, 0, .45);
+    --shadow-lg: 0 20px 45px rgba(0, 0, 0, .55);
+}
+
+/* ============================================================
+   בסיס – שני המצבים חולקים את אותו מבנה
+   ============================================================ */
+
+.backgroundApp,
+.backgroundAppDark {
+    min-height: 100vh;
+    padding: 32px 20px 64px;
+    direction: rtl;
+    text-align: right;
+    color: var(--text);
+    background: var(--bg-gradient);
+    background-color: var(--bg);
+    font-family: var(--font);
+    line-height: 1.6;
+    transition: background-color .3s ease, color .3s ease;
+}
+
+/* --- כותרת האתר --- */
+.siteHeader {
+    max-width: 640px;
+    margin: 0 auto 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+}
+
+.siteHeader h1 {
+    margin: 0;
+    font-size: clamp(1.3rem, 4vw, 1.7rem);
+    font-weight: 800;
+    letter-spacing: -.5px;
+    background: linear-gradient(90deg, var(--brand), var(--accent));
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+}
+
+/* כפתור החלפת מצב */
+.themeToggle {
+    border: 1px solid var(--border);
+    background: var(--surface);
+    color: var(--text);
+    padding: 7px 14px;
+    border-radius: 999px;
+    font-family: inherit;
+    font-size: .85rem;
+    font-weight: 600;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: transform var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.themeToggle:hover {
+    transform: translateY(-1px);
+    box-shadow: var(--shadow-md);
+}
+
+.themeToggle:active {
+    transform: translateY(0);
+}
+
+/* --- רשת המוצרים --- */
+.productGrid {
+    max-width: 640px;
+    margin: 0 auto;
+    display: grid;
+    grid-template-columns: 1fr;
+    gap: 14px;
+}
+
+/* ============================================================
+   כרטיס מוצר
+   ============================================================ */
+
+.productCard {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    width: 100%;
+    max-width: 350px;
+    aspect-ratio: 1 / 1;
+    margin-inline: auto;
+    overflow-y: auto;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+    transition: transform var(--transition), box-shadow var(--transition), border-color var(--transition);
+}
+
+.productCard:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-lg);
+    border-color: var(--brand);
+}
+
+.productCardTop {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+}
+
+.productName {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+    line-height: 1.3;
+}
+
+.productPrice {
+    flex-shrink: 0;
+    padding: 3px 10px;
+    border-radius: 999px;
+    background: var(--brand-soft);
+    color: var(--brand-strong);
+    font-weight: 700;
+    font-size: .95rem;
+}
+
+/* --- תיאור המוצר --- */
+.descriptionBlock {
+    color: var(--text-muted);
+    font-size: .88rem;
+}
+
+.shortDescription {
+    margin: 0 0 8px;
+}
+
+.featureList {
+    margin: 0 0 8px;
+    padding-inline-start: 20px;
+    display: grid;
+    gap: 4px;
+}
+
+.featureList li::marker {
+    color: var(--brand);
+}
+
+.linkBtn {
+    background: none;
+    border: none;
+    padding: 0;
+    color: var(--brand);
+    font-family: inherit;
+    font-size: .9rem;
+    font-weight: 600;
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 3px;
+}
+
+.linkBtn:hover {
+    color: var(--brand-strong);
+}
+
+/* --- כמות ומחיר --- */
+.productFooter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-top: auto;
+    padding-top: 10px;
+    border-top: 1px dashed var(--border);
+}
+
+.quantityControl {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    padding: 4px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+}
+
+.qtyBtn {
+    width: 28px;
+    height: 28px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    border-radius: 50%;
+    background: var(--surface);
+    color: var(--text);
+    font-size: 1rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: var(--shadow-sm);
+    transition: background var(--transition), color var(--transition), transform var(--transition);
+}
+
+.qtyBtn:hover:not(:disabled) {
+    background: var(--brand);
+    color: var(--brand-contrast);
+}
+
+.qtyBtn:active:not(:disabled) {
+    transform: scale(.92);
+}
+
+.qtyBtn:disabled {
+    opacity: .4;
+    cursor: not-allowed;
+}
+
+.qtyValue {
+    min-width: 28px;
+    text-align: center;
+    font-weight: 700;
+    font-variant-numeric: tabular-nums;
+}
+
+.totalPrice {
+    margin: 0;
+    color: var(--text-muted);
+    font-size: .85rem;
+}
+
+.totalPrice strong {
+    color: var(--text);
+    font-size: 1rem;
+}
+
+/* --- כפתורי פעולה --- */
+.cardActions {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.addToCartBtn {
+    width: 100%;
+    padding: 9px 14px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: linear-gradient(135deg, var(--brand), var(--brand-strong));
+    color: var(--brand-contrast);
+    font-family: inherit;
+    font-size: .9rem;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 6px 16px rgba(79, 70, 229, .28);
+    transition: transform var(--transition), box-shadow var(--transition), filter var(--transition);
+}
+
+.addToCartBtn:hover:not(:disabled) {
+    transform: translateY(-1px);
+    filter: brightness(1.06);
+    box-shadow: 0 10px 22px rgba(79, 70, 229, .36);
+}
+
+.addToCartBtn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+.addToCartBtn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.favoriteBlock {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.favoriteStatus {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    flex-shrink: 0;
+    padding: 2px 8px;
+    border-radius: 999px;
+    background: var(--surface-alt);
+    border: 1px solid var(--border);
+    color: var(--text-muted);
+    font-size: .75rem;
+    font-weight: 600;
+    transition: background var(--transition), border-color var(--transition), color var(--transition);
+}
+
+.favoriteStatus.isActive {
+    background: color-mix(in srgb, var(--heart) 12%, transparent);
+    border-color: var(--heart);
+    color: var(--heart);
+}
+
+.favoriteBtn {
+    width: 100%;
+    padding: 5px 12px;
+    margin-inline-start: auto;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+    color: var(--text-muted);
+    font-family: inherit;
+    font-size: .82rem;
+    cursor: pointer;
+    transition: border-color var(--transition), color var(--transition), background var(--transition);
+}
+
+.favoriteBtn:hover {
+    border-color: var(--heart);
+    color: var(--heart);
+}
+
+.favoriteBtn.isFavorite {
+    border-color: var(--heart);
+    background: color-mix(in srgb, var(--heart) 12%, transparent);
+    color: var(--heart);
+    font-weight: 700;
+}
+
+/* ============================================================
+   טופס פנייה
+   ============================================================ */
+
+.contactSection {
+    max-width: 350px;
+    margin: 28px auto 0;
+    padding: 18px;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-md);
+}
+
+.contactSection h2 {
+    margin: 0 0 12px;
+    font-size: 1.1rem;
+    font-weight: 800;
+}
+
+.contactForm {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+    min-width: 0;
+}
+
+.contactForm textarea {
+    display: block;
+    box-sizing: border-box;
+    width: 100%;
+    max-width: 100%;
+    min-height: 84px;
+    padding: 10px 12px;
+    border: 1px solid var(--border);
+    border-radius: var(--radius-sm);
+    background: var(--surface-alt);
+    color: var(--text);
+    font-family: inherit;
+    font-size: .88rem;
+    line-height: 1.6;
+    resize: none;
+    transition: border-color var(--transition), box-shadow var(--transition), background var(--transition);
+}
+
+.contactForm textarea::placeholder {
+    color: var(--text-muted);
+    opacity: .7;
+}
+
+.contactForm textarea:focus {
+    outline: none;
+    border-color: var(--brand);
+    background: var(--surface);
+    box-shadow: 0 0 0 4px var(--brand-soft);
+}
+
+.charCounter {
+    margin: 0;
+    align-self: flex-start;
+    color: var(--text-muted);
+    font-size: .78rem;
+}
+
+.submitBtn {
+    padding: 9px 16px;
+    border: none;
+    border-radius: var(--radius-sm);
+    background: var(--brand);
+    color: var(--brand-contrast);
+    font-family: inherit;
+    font-size: .88rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: background var(--transition), transform var(--transition), opacity var(--transition);
+}
+
+.submitBtn:hover:not(:disabled) {
+    background: var(--brand-strong);
+    transform: translateY(-1px);
+}
+
+.submitBtn:disabled {
+    opacity: .45;
+    cursor: not-allowed;
+}
+
+.successMessage {
+    margin: 0;
+    padding: 16px 20px;
+    border-radius: var(--radius);
+    background: var(--success-soft);
+    color: var(--success);
+    font-weight: 700;
+    text-align: center;
+}
+
+/* ============================================================
+   נגישות
+   ============================================================ */
+
+:is(button, textarea):focus-visible {
+    outline: 3px solid var(--brand);
+    outline-offset: 2px;
+}
+
+/* ============================================================
+   התאמה למסכים קטנים
+   ============================================================ */
+
+@media (max-width: 640px) {
+    .backgroundApp,
+    .backgroundAppDark {
+        padding: 20px 14px 48px;
+    }
+
+    .siteHeader {
+        flex-direction: row;
+    }
+
+    .productGrid {
+        grid-template-columns: 1fr;
+        gap: 16px;
+    }
+
+    .productCard {
+        padding: 20px;
+    }
+
+    .contactSection {
+        padding: 22px;
+        margin-top: 36px;
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+        animation: none !important;
+    }
+}
